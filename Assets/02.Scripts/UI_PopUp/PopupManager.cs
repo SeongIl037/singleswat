@@ -8,9 +8,10 @@ public enum EPopupMenu
     UI_Shop,
     UI_QuestMenu,
     UI_Map,
+    UI_Quest,
+    UI_PreviewMap,
     
-    
-    count
+    Count
 }
 
 public class PopupManager : Singletone<PopupManager>

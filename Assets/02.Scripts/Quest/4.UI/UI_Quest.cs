@@ -1,13 +1,15 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-public class UI_Quest : MonoBehaviour
+
+public class UI_Quest : UI_PopUp
 {
     // 슬롯 관리
     public List<UI_QuestSlot> Slots;
-    // 맵 번호에 따라서 오브젝트 켜주기 (맵 오브젝트 프리팹 관리하기)
-    public List<GameObject> MapPrefabs;
-
+    
+    public List<Sprite> PreviewSprites;
+    public MapPreviewController MapPreviewController;
+    
     private void Start()
     {
         Refresh();
@@ -19,7 +21,9 @@ public class UI_Quest : MonoBehaviour
    
         for (int i = 0; i < Slots.Count; i++)
         {
-            Slots[i].Refresh(quests[i]);
+            Slots[i].Init(quests[i], PreviewSprites[(int)quests[i].Stage]);
         }
     }
+    
+    
 }

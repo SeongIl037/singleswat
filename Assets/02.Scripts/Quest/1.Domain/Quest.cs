@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-
 public enum EStage
 {
     Stage1,
@@ -19,7 +17,6 @@ public class Quest
     public readonly EStage Stage;
     public readonly string Name;
     public readonly string Description;
-    public readonly Sprite Preview;
     
     // 보상 숫자 => 총 보상 수 (enemy 숫자에 따른 골드)
     public readonly int EnemyCount;
@@ -34,7 +31,7 @@ public class Quest
     {
         if (string.IsNullOrEmpty(data.Name))
         {
-            throw new Exception("퀘스트 이름이 없습니다.");
+            throw new Exception("의뢰의 이름이 없습니다.");
         }
         
         Stage = data.Stage;
@@ -65,7 +62,6 @@ public class Quest
             throw new Exception("미리보기 사진이 없습니다.");
         }
         
-        Preview = data.Preview;
         IndividualReward = data.IndvidualReward;
         TotalReward = IndividualReward * EnemyCount;
     }
