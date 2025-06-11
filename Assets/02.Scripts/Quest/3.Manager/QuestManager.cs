@@ -7,6 +7,8 @@ public class QuestManager : Singletone<QuestManager>
     private List<QuestSO> _questSO;
     
     private List<Quest> _quests;
+    public List<Quest> QuestList => _quests;
+    
     private void Awake()
     {
         base.Awake();
@@ -23,4 +25,6 @@ public class QuestManager : Singletone<QuestManager>
             _quests.Add(new Quest(data));
         }
     }
+    
+    
 }

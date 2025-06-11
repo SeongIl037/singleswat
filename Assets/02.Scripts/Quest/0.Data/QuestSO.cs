@@ -20,4 +20,7 @@ public class QuestSO : ScriptableObject
     
     [SerializeField] private ECurrencyType _currencyType;
     public ECurrencyType CurrencyType => _currencyType;
+    
+    [SerializeField] private Sprite _preview;
+    public Sprite Preview => _preview;
 }
