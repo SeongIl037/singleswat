@@ -13,7 +13,6 @@ public class UI_QuestSlot : MonoBehaviour
     public TextMeshProUGUI TotalReward;
     public Image Preview;
 
-    public Button PreviewButton;
     public Button StageButton;
     
     

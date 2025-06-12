@@ -56,11 +56,6 @@ public class Quest
         {
             throw new Exception("보상은 0보다 커야합니다.");
         }
-
-        if (data.Preview == null)
-        {
-            throw new Exception("미리보기 사진이 없습니다.");
-        }
         
         IndividualReward = data.IndvidualReward;
         TotalReward = IndividualReward * EnemyCount;

@@ -6,8 +6,6 @@ public enum EPopupMenu
 {
     UI_Option,
     UI_Shop,
-    UI_QuestMenu,
-    UI_Map,
     UI_Quest,
     UI_PreviewMap,
     
