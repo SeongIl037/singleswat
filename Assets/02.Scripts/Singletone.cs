@@ -13,12 +13,12 @@ public class Singletone<T> : MonoBehaviour where T : MonoBehaviour
             {
                 // 씬에서 찾기
                 _instance = FindObjectOfType<T>();
+                
                 if (_instance == null)
                 {
                     // 씬에 없으면 새로 생성
                     GameObject singletonObject = new GameObject(typeof(T).Name);
-                    _instance = singletonObject.AddComponent<T>();
-                    DontDestroyOnLoad(singletonObject); // 씬 전환 시에도 유지
+                   _instance = singletonObject.AddComponent<T>();
                 }
 
             }

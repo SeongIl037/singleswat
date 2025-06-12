@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : Singletone<QuestManager>
 {
@@ -8,6 +9,8 @@ public class QuestManager : Singletone<QuestManager>
     
     private List<Quest> _quests;
     public List<Quest> QuestList => _quests;
+
+    public readonly int Spawn = 1;
     
     private void Awake()
     {
@@ -25,6 +28,5 @@ public class QuestManager : Singletone<QuestManager>
             _quests.Add(new Quest(data));
         }
     }
-    
     
 }

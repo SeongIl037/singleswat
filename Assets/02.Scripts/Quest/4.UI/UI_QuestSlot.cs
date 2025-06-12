@@ -34,7 +34,7 @@ public class UI_QuestSlot : MonoBehaviour
     
     public void OnStage()
     {
-        SceneManager.LoadScene(_slotID);
+        StageManger.Instance.LoadQuests(_slotID);
     }
     
 }
