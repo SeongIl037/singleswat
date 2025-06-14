@@ -478,14 +478,9 @@ namespace PhysicsCharacterController
 
         private void MoveSliding()
         {
-            if (sprint && _sliding && isGrounded)
+            if (_sliding)
             {
-                isSliding = true;
                 Debug.Log("sliding");
-            }
-            else
-            {
-                isSliding = false;
             }
         }
         private void MoveWalk()

@@ -63,9 +63,9 @@ namespace PhysicsCharacterController
 
             movementActions.Gameplay.Crouch.performed += ctx => OnCrouch(ctx);
             movementActions.Gameplay.Crouch.canceled += ctx => CrouchEnded(ctx);
-            //
-            // movementActions.Gameplay.Sliding.performed += ctx => OnSliding(ctx);
-            // movementActions.Gameplay.Sliding.canceled += ctx => SlidingEnded(ctx);
+            
+            movementActions.Gameplay.Sliding.performed += ctx => OnSliding(ctx);
+            movementActions.Gameplay.Sliding.canceled += ctx => SlidingEnded(ctx);
         }
 
 
