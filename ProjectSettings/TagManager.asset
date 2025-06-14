@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - MiniMapCamera
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - MiniMap_First
   - MiniMap_Second
   - MiniMap_Third
+  - Floor
   - 
-  - 
-  - 
+  - PlayerHead
   - 
   - 
   - 
