@@ -536,6 +536,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
+        // m_Gameplay_Sliding = m_Gameplay.FindAction("Sliding", throwIfNotFound: true);
     }
 
     ~@MovementActions()
@@ -621,6 +622,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Camera;
     private readonly InputAction m_Gameplay_Sprint;
     private readonly InputAction m_Gameplay_Crouch;
+    private readonly InputAction m_Gameplay_Sliding;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -652,6 +654,8 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Crouch".
         /// </summary>
         public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
+
+        public InputAction @Sliding => m_Wrapper.m_Gameplay_Sliding;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -693,6 +697,10 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Sliding.started += instance.OnSliding;
+            @Sliding.performed += instance.OnSliding;
+            @Sliding.canceled += instance.OnSliding;
+            
         }
 
         /// <summary>
@@ -719,6 +727,10 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Sliding.started -= instance.OnSliding;
+            @Sliding.performed -= instance.OnSliding;
+            @Sliding.canceled -= instance.OnSliding;
+            
         }
 
         /// <summary>
@@ -833,5 +845,8 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCrouch(InputAction.CallbackContext context);
+        
+        
+        void OnSliding(InputAction.CallbackContext context);
     }
 }

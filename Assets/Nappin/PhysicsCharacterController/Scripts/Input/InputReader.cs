@@ -17,7 +17,7 @@ namespace PhysicsCharacterController
         public bool enableJump = true;
         public bool enableCrouch = true;
         public bool enableSprint = true;
-
+        
 
         [HideInInspector]
         public Vector2 axisInput;
@@ -29,6 +29,9 @@ namespace PhysicsCharacterController
         public bool sprint;
         [HideInInspector]
         public bool crouch;
+        [HideInInspector] 
+        public bool Sliding;
+        
 
 
         private bool hasJumped = false;
@@ -49,7 +52,7 @@ namespace PhysicsCharacterController
             movementActions = new MovementActions();
 
             movementActions.Gameplay.Movement.performed += ctx => OnMove(ctx);
-
+            
             movementActions.Gameplay.Jump.performed += ctx => OnJump();
             movementActions.Gameplay.Jump.canceled += ctx => JumpEnded();
 
@@ -60,6 +63,9 @@ namespace PhysicsCharacterController
 
             movementActions.Gameplay.Crouch.performed += ctx => OnCrouch(ctx);
             movementActions.Gameplay.Crouch.canceled += ctx => CrouchEnded(ctx);
+            //
+            // movementActions.Gameplay.Sliding.performed += ctx => OnSliding(ctx);
+            // movementActions.Gameplay.Sliding.canceled += ctx => SlidingEnded(ctx);
         }
 
 
@@ -192,6 +198,15 @@ namespace PhysicsCharacterController
             crouch = false;
         }
 
+        public void OnSliding(InputAction.CallbackContext ctx)
+        {
+            Sliding = true;
+        }
+
+        public void SlidingEnded(InputAction.CallbackContext ctx)
+        {
+            Sliding = false;
+        }
         #endregion
 
 

@@ -180,12 +180,14 @@ namespace PhysicsCharacterController
         private bool isTouchingWall = false;
         private bool isJumping = false;
         private bool isCrouch = false;
+        private bool isSliding = false;
 
         private Vector2 axisInput;
         private bool jump;
         private bool jumpHold;
         private bool sprint;
         private bool crouch;
+        private bool _sliding;
 
         [HideInInspector]
         public float targetAngle;
@@ -221,6 +223,7 @@ namespace PhysicsCharacterController
             jumpHold = input.jumpHold;
             sprint = input.sprint;
             crouch = input.crouch;
+            _sliding = input.Sliding;
         }
 
 
@@ -235,7 +238,7 @@ namespace PhysicsCharacterController
             //movement
             MoveCrouch();
             MoveWalk();
-
+            MoveSliding();
             if (!lockToCamera) MoveRotation();
             else ForceRotation();
 
@@ -473,7 +476,18 @@ namespace PhysicsCharacterController
             }
         }
 
-
+        private void MoveSliding()
+        {
+            if (sprint && _sliding && isGrounded)
+            {
+                isSliding = true;
+                Debug.Log("sliding");
+            }
+            else
+            {
+                isSliding = false;
+            }
+        }
         private void MoveWalk()
         {
             float crouchMultiplier = 1f;
@@ -631,8 +645,8 @@ namespace PhysicsCharacterController
         public bool GetTouchingWall() { return isTouchingWall; }
         public bool GetJumping() { return isJumping; }
         public bool GetCrouching() { return isCrouch; }
+        public bool GetSprint() { return sprint;}
         public float GetOriginalColliderHeight() { return originalColliderHeight; }
-
         public void SetLockRotation(bool _lock) { lockRotation = _lock; }
         public void SetLockToCamera(bool _lockToCamera) { lockToCamera = _lockToCamera; if (!_lockToCamera) targetAngle = characterModel.transform.eulerAngles.y; }
 

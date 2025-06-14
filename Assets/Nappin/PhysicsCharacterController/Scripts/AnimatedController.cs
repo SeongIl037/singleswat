@@ -38,19 +38,36 @@ namespace PhysicsCharacterController
 
 
         private void Update()
-        {
-            anim.SetFloat("velocity", rigidbodyCharacter.linearVelocity.magnitude * velocityAnimationMultiplier);
+        { 
+            float walk = 0;
+            float horizontal = new Vector3(rigidbodyCharacter.linearVelocity.x, 0, rigidbodyCharacter.linearVelocity.z).magnitude;
 
-            anim.SetBool("isGrounded", CheckAnimationGrounded());
+            if (horizontal > 0.1f)
+            {
+                walk = Mathf.Abs(horizontal);
+            }
+            else
+            {
+                walk = 0;
+            }
+            anim.SetFloat("Walk", walk);
+            
+            anim.SetBool("Run", characterManager.GetSprint()); 
+            anim.SetBool("Crouch", characterManager.GetCrouching());
+            
+            //     anim.SetFloat("velocity", rigidbodyCharacter.linearVelocity.magnitude * velocityAnimationMultiplier);
+            //
+            //     anim.SetBool("isGrounded", CheckAnimationGrounded());
+            //
+            //     anim.SetBool("isJump", characterManager.GetJumping());
+            //
+            //     anim.SetBool("isTouchWall", characterManager.GetTouchingWall());
+            //     if (lockRotationOnWall) characterManager.SetLockRotation(characterManager.GetTouchingWall());
+            //
+            //     anim.SetBool("isClimb", characterManager.GetTouchingWall() && rigidbodyCharacter.linearVelocity.y > climbThreshold);
+            //
+            //     anim.SetBool("isCrouch", characterManager.GetCrouching());
 
-            anim.SetBool("isJump", characterManager.GetJumping());
-
-            anim.SetBool("isTouchWall", characterManager.GetTouchingWall());
-            if (lockRotationOnWall) characterManager.SetLockRotation(characterManager.GetTouchingWall());
-
-            anim.SetBool("isClimb", characterManager.GetTouchingWall() && rigidbodyCharacter.linearVelocity.y > climbThreshold);
-
-            anim.SetBool("isCrouch", characterManager.GetCrouching());
         }
 
 
