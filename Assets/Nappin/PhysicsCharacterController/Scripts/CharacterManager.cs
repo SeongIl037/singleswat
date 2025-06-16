@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 
@@ -224,6 +225,8 @@ namespace PhysicsCharacterController
             sprint = input.sprint;
             crouch = input.crouch;
             _sliding = input.Sliding;
+            
+            MoveSliding();
         }
 
 
@@ -238,7 +241,10 @@ namespace PhysicsCharacterController
             //movement
             MoveCrouch();
             MoveWalk();
-            MoveSliding();
+            if (isSliding)
+            {
+                UpdateSliding();
+            }
             if (!lockToCamera) MoveRotation();
             else ForceRotation();
 
@@ -476,13 +482,70 @@ namespace PhysicsCharacterController
             }
         }
 
+        private float _currentSlideSpeed;
+        private float _minSlideSpeed;
+        private Vector3 _slideDirection;
         private void MoveSliding()
         {
-            if (_sliding)
+            if (!isSliding)
             {
-                Debug.Log("sliding");
+                
+                if (_sliding && isGrounded)
+                {
+                    StartSliding();
+                }    
             }
+            else
+            {
+                if (!_sliding || _currentSlideSpeed <= _minSlideSpeed || !isGrounded)
+                {
+                    EndSliding();
+                }
+            }
+            
         }
+
+        private void StartSliding()
+        {
+            isSliding = true;
+            
+            _slideDirection = rigidbody.linearVelocity.normalized;
+
+            if (_slideDirection.magnitude < 0.1f)
+            {
+                _slideDirection = transform.forward;
+            }
+
+            _currentSlideSpeed = sprintSpeed + 2;
+            if (meshCharacterCrouch != null && meshCharacter != null) meshCharacter.SetActive(false);
+            if (meshCharacterCrouch != null) meshCharacterCrouch.SetActive(true);
+        }
+
+        private void UpdateSliding()
+        {
+            Vector3 horizontalVelocity = _slideDirection * _currentSlideSpeed;
+            rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, rigidbody.linearVelocity.y, horizontalVelocity.z);
+            
+            _currentSlideSpeed = Mathf.MoveTowards(_currentSlideSpeed, 0, _currentSlideSpeed * Time.fixedDeltaTime);
+            
+            if (meshCharacterCrouch != null && meshCharacter != null) meshCharacter.SetActive(true);
+            if (meshCharacterCrouch != null) meshCharacterCrouch.SetActive(false);
+
+        }
+
+        private void EndSliding()
+        {
+            if (!isSliding)
+            {
+                return;
+            }
+            
+            isSliding = false;
+            _currentSlideSpeed = 0;
+            
+        }
+        
+        
         private void MoveWalk()
         {
             float crouchMultiplier = 1f;
