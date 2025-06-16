@@ -215,8 +215,7 @@ namespace PhysicsCharacterController
             currentLockOnSlope = lockOnSlope;
         }
 
-
-        private void Update()
+      private void Update()
         {
             //input
             axisInput = input.axisInput;
@@ -257,6 +256,7 @@ namespace PhysicsCharacterController
             UpdateEvents();
         }
 
+  
 
         #region Checks
 
@@ -457,6 +457,11 @@ namespace PhysicsCharacterController
 
         private void MoveCrouch()
         {
+            if (isSliding)
+            {
+                return;
+            }
+            
             if (crouch && isGrounded)
             {
                 isCrouch = true;
@@ -489,6 +494,10 @@ namespace PhysicsCharacterController
         {
             if (!isSliding)
             {
+                if (!sprint)
+                {
+                    return;
+                }
                 
                 if (_sliding && isGrounded)
                 {
@@ -516,21 +525,24 @@ namespace PhysicsCharacterController
                 _slideDirection = transform.forward;
             }
 
-            _currentSlideSpeed = sprintSpeed + 2;
             if (meshCharacterCrouch != null && meshCharacter != null) meshCharacter.SetActive(false);
             if (meshCharacterCrouch != null) meshCharacterCrouch.SetActive(true);
+           
+            float newHeight = originalColliderHeight * crouchHeightMultiplier;
+            collider.height = newHeight;
+            collider.center = new Vector3(0f, -newHeight * crouchHeightMultiplier, 0f);
+
+            // headPoint.position = new Vector3(transform.position.x + POV_crouchHeadHeight.x, transform.position.y + POV_crouchHeadHeight.y, transform.position.z + POV_crouchHeadHeight.z);
+            
+            _currentSlideSpeed = sprintSpeed;
         }
 
-        private void UpdateSliding()
+        public void UpdateSliding()
         {
             Vector3 horizontalVelocity = _slideDirection * _currentSlideSpeed;
             rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, rigidbody.linearVelocity.y, horizontalVelocity.z);
             
             _currentSlideSpeed = Mathf.MoveTowards(_currentSlideSpeed, 0, _currentSlideSpeed * Time.fixedDeltaTime);
-            
-            if (meshCharacterCrouch != null && meshCharacter != null) meshCharacter.SetActive(true);
-            if (meshCharacterCrouch != null) meshCharacterCrouch.SetActive(false);
-
         }
 
         private void EndSliding()
@@ -542,7 +554,15 @@ namespace PhysicsCharacterController
             
             isSliding = false;
             _currentSlideSpeed = 0;
+                        
+            if (meshCharacterCrouch != null && meshCharacter != null) meshCharacter.SetActive(true);
+            if (meshCharacterCrouch != null) meshCharacterCrouch.SetActive(false);
             
+            collider.height = originalColliderHeight;
+            collider.center = Vector3.zero;
+            
+            // headPoint.position = new Vector3(transform.position.x + POV_normalHeadHeight.x, transform.position.y + POV_normalHeadHeight.y, transform.position.z + POV_normalHeadHeight.z);
+
         }
         
         
@@ -704,6 +724,7 @@ namespace PhysicsCharacterController
         public bool GetJumping() { return isJumping; }
         public bool GetCrouching() { return isCrouch; }
         public bool GetSprint() { return sprint;}
+        public bool GetSliding() { return isSliding; }
         public float GetOriginalColliderHeight() { return originalColliderHeight; }
         public void SetLockRotation(bool _lock) { lockRotation = _lock; }
         public void SetLockToCamera(bool _lockToCamera) { lockToCamera = _lockToCamera; if (!_lockToCamera) targetAngle = characterModel.transform.eulerAngles.y; }

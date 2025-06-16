@@ -519,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.73, z: 0.1273}
+  m_LocalPosition: {x: 0, y: 1.65, z: 0.145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -720,7 +720,7 @@ Transform:
   m_GameObject: {fileID: 408469873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.73, z: 0.1273}
+  m_LocalPosition: {x: 0, y: 1.65, z: 0.145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2714,11 +2714,11 @@ Transform:
   m_GameObject: {fileID: 911280264}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.000000042146848, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7300005, z: 0.12730002}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0.145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1525930093}
+  m_Father: {fileID: 1862548609}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &967034120
 GameObject:
@@ -4290,7 +4290,7 @@ Transform:
   m_Children:
   - {fileID: 5855111972845095145}
   - {fileID: 894133456}
-  - {fileID: 911280265}
+  - {fileID: 1862548609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1525930096
@@ -4335,7 +4335,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 512
-  movementSpeed: 14
+  movementSpeed: 10
   crouchSpeedMultiplier: 0.248
   movementThrashold: 0.01
   dampSpeedUp: 0.2
@@ -4388,14 +4388,14 @@ MonoBehaviour:
   multiplierVerticalLeap: 1
   sprintSpeed: 20
   crouchHeightMultiplier: 0.5
-  POV_normalHeadHeight: {x: 0, y: 0.73, z: 0}
+  POV_normalHeadHeight: {x: 0, y: 0, z: 0}
   POV_crouchHeadHeight: {x: 0, y: -0.1, z: -0.1}
   characterCamera: {fileID: 330585543}
   characterModel: {fileID: 1525930089}
   characterModelRotationSmooth: 0.1
   meshCharacter: {fileID: 5855111972845095144}
   meshCharacterCrouch: {fileID: 0}
-  headPoint: {fileID: 911280265}
+  headPoint: {fileID: 1862548609}
   input: {fileID: 894133457}
   debug: 1
   OnJump:
@@ -6238,6 +6238,38 @@ Transform:
   m_Children:
   - {fileID: 1545534462}
   m_Father: {fileID: 856408735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1862548608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1862548609}
+  m_Layer: 0
+  m_Name: HeadPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1862548609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862548608}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 911280265}
+  m_Father: {fileID: 1525930093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1983970784
 GameObject:
