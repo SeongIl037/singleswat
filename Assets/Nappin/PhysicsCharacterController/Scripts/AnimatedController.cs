@@ -55,7 +55,6 @@ namespace PhysicsCharacterController
             anim.SetBool("Run", characterManager.GetSprint()); 
             anim.SetBool("Crouch", characterManager.GetCrouching());
             anim.SetBool("Slide", characterManager.GetSliding());
-            
             //     anim.SetFloat("velocity", rigidbodyCharacter.linearVelocity.magnitude * velocityAnimationMultiplier);
             //
             //     anim.SetBool("isGrounded", CheckAnimationGrounded());

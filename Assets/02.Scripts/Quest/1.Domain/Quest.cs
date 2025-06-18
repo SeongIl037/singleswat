@@ -11,6 +11,13 @@ public enum EStage
     
     Count
 }
+
+public enum ECurrencyType
+{
+    Gold,
+    
+    Count
+}
 public class Quest
 {
     // 스테이지 상태, 이름, 소개

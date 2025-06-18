@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Vector3 = UnityEngine.Vector3;
 
 
 namespace PhysicsCharacterController
@@ -126,8 +127,8 @@ namespace PhysicsCharacterController
         public GameObject meshCharacterCrouch;
         [Tooltip("Head reference")]
         public Transform headPoint;
-        [Space(10)]
-
+        [Space(10)] 
+        
         [Tooltip("Input reference")]
         public InputReader input;
         [Space(10)]
@@ -471,8 +472,9 @@ namespace PhysicsCharacterController
                 float newHeight = originalColliderHeight * crouchHeightMultiplier;
                 collider.height = newHeight;
                 collider.center = new Vector3(0f, -newHeight * crouchHeightMultiplier, 0f);
-
+                
                 headPoint.position = new Vector3(transform.position.x + POV_crouchHeadHeight.x, transform.position.y + POV_crouchHeadHeight.y, transform.position.z + POV_crouchHeadHeight.z);
+               
             }
             else
             {
@@ -484,6 +486,7 @@ namespace PhysicsCharacterController
                 collider.center = Vector3.zero;
 
                 headPoint.position = new Vector3(transform.position.x + POV_normalHeadHeight.x, transform.position.y + POV_normalHeadHeight.y, transform.position.z + POV_normalHeadHeight.z);
+
             }
         }
 
@@ -532,9 +535,8 @@ namespace PhysicsCharacterController
             collider.height = newHeight;
             collider.center = new Vector3(0f, -newHeight * crouchHeightMultiplier, 0f);
 
-            // headPoint.position = new Vector3(transform.position.x + POV_crouchHeadHeight.x, transform.position.y + POV_crouchHeadHeight.y, transform.position.z + POV_crouchHeadHeight.z);
-            
-            _currentSlideSpeed = sprintSpeed;
+            headPoint.position = new Vector3(transform.position.x + POV_crouchHeadHeight.x, transform.position.y + POV_crouchHeadHeight.y, transform.position.z + POV_crouchHeadHeight.z);
+             _currentSlideSpeed = sprintSpeed;
         }
 
         public void UpdateSliding()
@@ -547,11 +549,6 @@ namespace PhysicsCharacterController
 
         private void EndSliding()
         {
-            if (!isSliding)
-            {
-                return;
-            }
-            
             isSliding = false;
             _currentSlideSpeed = 0;
                         
@@ -561,8 +558,8 @@ namespace PhysicsCharacterController
             collider.height = originalColliderHeight;
             collider.center = Vector3.zero;
             
-            // headPoint.position = new Vector3(transform.position.x + POV_normalHeadHeight.x, transform.position.y + POV_normalHeadHeight.y, transform.position.z + POV_normalHeadHeight.z);
-
+            headPoint.position = new Vector3(transform.position.x + POV_normalHeadHeight.x, transform.position.y + POV_normalHeadHeight.y, transform.position.z + POV_normalHeadHeight.z);
+        
         }
         
         
