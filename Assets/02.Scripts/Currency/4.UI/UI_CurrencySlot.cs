@@ -16,6 +16,5 @@ public class UI_CurrencySlot : MonoBehaviour
         RedText.text = currencydto.Red.ToString();
         WhiteText.text = currencydto.White.ToString();
         BlueText.text = currencydto.Blue.ToString();
-        
     }
 }

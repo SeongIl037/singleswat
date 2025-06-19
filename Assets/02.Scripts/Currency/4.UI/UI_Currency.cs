@@ -10,11 +10,14 @@ public class UI_Currency : MonoBehaviour
 
     private void Awake()
     {
-        CurrencyManager.Instance.DataOnChanged += SlotRefresh;
+        
+        CurrencyManager.Instance.OnDataChanged += SlotRefresh;
     }
     private void Start()
     {
+        
         SlotRefresh();
+        
     }
 
     private void SlotRefresh()
