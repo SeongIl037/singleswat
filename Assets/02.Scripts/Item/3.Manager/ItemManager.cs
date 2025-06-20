@@ -5,12 +5,13 @@ public class ItemManager : Singletone<ItemManager>
 {
     // 아이템 아이디를 가지고 아이템의 정보를 찾아온다.
     private Dictionary<int, ItemDTO> _items;
-    
+    public Dictionary<int, ItemDTO> Items => _items;
     //아이템
     [SerializeField] private List<ItemSO> _itemData;
     
     private List<Item> _item;
     public List<ItemDTO> Itemlist => _item.ConvertAll(i => i.ToDTO());
+    
     protected override void Awake()
     {
         base.Awake();
