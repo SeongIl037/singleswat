@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class ItemRepository : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private const string SAVE_KEY = "ItemRepository";
+    
+    // 아이템 저장 => 인벤토리에만 사용한다.
+    public void Save()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    // 아이템 가져오기 => 인벤토리에만 사용한다.
+    public void Load()
     {
         
     }
 }
+
