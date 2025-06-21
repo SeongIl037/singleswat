@@ -3,14 +3,14 @@
 public class ItemDTO
 {
     public readonly EItemType ItemType;
-    public readonly int ItemId;
+    public readonly string ItemId;
     public readonly string ItemName;
     public readonly string ItemDescription;
     public readonly int PurchasePrice;
     public readonly int SellPrice;
     public readonly Sprite ItemImage;
 
-    public ItemDTO(EItemType itemType, int itemId, string itemName, string itemDescription, int purchasePrice, int sellPrice, Sprite itemImage)
+    public ItemDTO(EItemType itemType, string itemId, string itemName, string itemDescription, int purchasePrice, int sellPrice, Sprite itemImage)
     {
         ItemType = itemType;
         ItemId = itemId;

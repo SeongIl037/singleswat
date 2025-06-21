@@ -1,31 +1,64 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
-public class InventoryRepository : MonoBehaviour
+public class InventoryRepository
 {
     private const string SAVE_KEY = "Inventory";
     
-    public void Save()
+    public void Save(List<Inventory> inventory)
     {
-           
+        AllInventoriesSaveData saveData = new AllInventoriesSaveData();
+
+        foreach (Inventory inventoryItem in inventory)
+        {
+            InventorySaveData save = new InventorySaveData(inventoryItem);
+            saveData.Datas.Add(save);
+        }
+
+        string json = JsonUtility.ToJson(saveData);
+        PlayerPrefs.SetString(SAVE_KEY, json);
+        
+        PlayerPrefs.Save();
     }
 
-    public List<Inventory> Load()
+    public AllInventoriesSaveData Load()
     {
+        if (!PlayerPrefs.HasKey(SAVE_KEY))
+        {
+            return null;
+        }
+        string jsonData = PlayerPrefs.GetString(SAVE_KEY);
+        AllInventoriesSaveData save = JsonUtility.FromJson<AllInventoriesSaveData>(jsonData);
         
-        return new List<Inventory>();
+        return save;
     }
 }
 
+[Serializable]
+public class AllInventoriesSaveData
+{
+    public List<InventorySaveData> Datas;
+
+    public AllInventoriesSaveData()
+    {
+        Datas = new List<InventorySaveData>();
+    }
+}
+
+[Serializable]
 public class InventorySaveData
 {
-    public int InventoryID;
+    public string InventoryID;
+    public int MaxCount;
     public List<ItemDTO> Items;
+    
 
-    public InventorySaveData(int inventoryID, List<ItemDTO> items)
+    public InventorySaveData(Inventory inventory)
     {
-        InventoryID = inventoryID;
-        Items = items;
+        InventoryID = inventory.ID;
+        MaxCount = inventory.MaxSlotCount;
+        Items = inventory.Items;
     }
 }

@@ -13,19 +13,23 @@ public class Item
 {
     // 아이템 관련 정보
     public readonly EItemType ItemType;
-    public readonly int ItemId;
+    
     public readonly string ItemName;
     public readonly string ItemDescription;
+
+    public readonly string ItemId;
     public readonly int PurchasePrice;
     public readonly int SellPrice;
+    public int Quantity { get; private set;}
+    
     public readonly Sprite ItemImage;
 
-    public Item(EItemType type, int id, string name, string description, int sell, int purchase, Sprite image)
+    public Item(EItemType type, string id, string name, string description, int sell, int purchase,int quantity, Sprite image)
     {
         // id는 없을 수 없다.
-        if (id < 0)
+        if (string.IsNullOrEmpty(id))
         {
-            throw new Exception("id는 음수가 될 수 없습니다.");
+            throw new Exception("아이템 아이디가 추가되지 않았습니다.");
         }
         // name은 없을 수 없다.
         if (string.IsNullOrEmpty(name) || name.Length > 10)
@@ -52,6 +56,11 @@ public class Item
         {
             throw new Exception("아이템 이미지가 없습니다.");
         }
+
+        if (quantity < 0)
+        {
+            throw new Exception("아이템 개수는 음수가 될 수 없습니다.");
+        }
         
         ItemType = type;
         ItemId = id;
@@ -59,9 +68,44 @@ public class Item
         ItemDescription = description;
         PurchasePrice = purchase;
         SellPrice = sell;
+        Quantity = quantity;
         ItemImage = image;
         
     }
+    // 아이템 개수 체크하기
+    private bool CanAddItem(string itemID)
+    {
+        if (ItemId == itemID)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    public void AddItem(string itemID, int quantitys)
+    {
+        if (!CanAddItem(itemID))
+        {
+            return;
+        }
+
+        Quantity += quantitys;
+    }
+    // // 착용 아이템 아이디
+    // private string IDMaker(string characterID)
+    // {
+    //     string equipmentID = characterID;
+    //
+    //     if (ItemType == EItemType.Equipment)
+    //     {
+    //         equipmentID =$"{ItemId}" + "_" + characterID; 
+    //         
+    //         return equipmentID;   
+    //     }
+    //
+    //     return ItemId;
+    // }
 
     public ItemDTO ToDTO()
     {

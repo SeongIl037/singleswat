@@ -16,8 +16,8 @@ public class ItemSO : ScriptableObject
     public string Name => _name;
     
     [SerializeField]
-    private int _id;
-    public int Id => _id;
+    private string _id;
+    public string Id => _id;
     
     [SerializeField]
     private int _purchasePrice;
@@ -26,6 +26,10 @@ public class ItemSO : ScriptableObject
     [SerializeField]
     private int _sellPrice;
     public int SellPrice => _sellPrice;
+
+    [SerializeField] 
+    private int quantity;
+    public int Quantity => quantity;
     
     [SerializeField]
     private Sprite _icon;
