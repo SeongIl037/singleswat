@@ -8,6 +8,8 @@ public class Inventory
     // 인벤토리 ID => 아이템들이 찾아갈 수 있도록 하기 위함
     public readonly string ID;
     public readonly int MaxSlotCount;
+    
+    
     // 현재 내 인벤토리에 있는 아이템들
     public readonly List<ItemDTO> Items;
 

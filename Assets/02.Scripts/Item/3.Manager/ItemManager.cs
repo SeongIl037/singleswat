@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,14 +10,19 @@ public class ItemManager : Singletone<ItemManager>
     //아이템
     [SerializeField] private List<ItemSO> _itemData;
     
-    private List<Item> _item;
-    public List<ItemDTO> Itemlist => _item.ConvertAll(i => i.ToDTO());
+    // private List<Item> _item;
+    // public List<ItemDTO> Itemlist => _item.ConvertAll(i => i.ToDTO());
     
     protected override void Awake()
     {
         base.Awake();
 
         Init();
+    }
+
+    private void Start()
+    {
+        ItemListCheck();
     }
 
     // 현재 존재하는 모든 아이템에 대한 것들을 모두 가져온다.
@@ -27,7 +33,7 @@ public class ItemManager : Singletone<ItemManager>
         // 세팅하기 (데이터 불러오기)
         foreach (ItemSO data in _itemData)
         {
-            Item item = new Item(data.ItemType, data.Id, data.name, data.Description,
+            Item item = new Item(data.ItemType, data.Id, data.Name, data.Description,
                 data.SellPrice, data.PurchasePrice,data.Quantity, data.Icon);
             
             _items.Add(item.ItemId, item.ToDTO());
@@ -39,5 +45,12 @@ public class ItemManager : Singletone<ItemManager>
     {
         return Items[id];
     }
-    
+
+    private void ItemListCheck()
+    {
+        foreach (var item in Items)
+        {
+            Debug.Log($"{item.Key}: {item.Value.ItemId}, {item.Value.ItemDescription}");   
+        }
+    }
 }
