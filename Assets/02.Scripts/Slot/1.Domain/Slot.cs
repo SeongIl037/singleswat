@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Slot
@@ -20,17 +21,48 @@ public class Slot
         Quantity = quantity;
         
     }
-    public bool IsEmpty => Quantity == 0;
     
-    // 슬롯의 개수가 0이면 false, 1개 이상이라면 true => 슬롯에 있는 숫자와 이미지를 끄고 키기 위함;
-    public bool SlotEmptyCheck()
+    public bool IsEmpty => Quantity == 0;
+
+    // 수량 추가
+    public void AddQuantity(string itemID, int quantity)
     {
-        if (Quantity == 0)
+        if (quantity < 0)
         {
-            return false;
+            throw new Exception("음수를 더할 수 없습니다.");
+        }
+
+        if (IsEmpty)
+        {
+            ID = itemID;
         }
         
-        return true;
+        Quantity += quantity;
+        
+    }
+
+    // 수량 빼기
+    public void SubQuantity(int quantity)
+    {
+        if (quantity < 0)
+        {
+            throw new Exception("음수를 뺄 수 없습니다.");
+        }
+
+        if (Quantity < quantity)
+        {
+            return;
+        }
+        
+        Quantity -= quantity;
+
+        if (!IsEmpty)
+        {
+            return;
+        }
+
+        this.ID = Empty.ID;
+        this.Quantity = Empty.Quantity;
     }
 
     

@@ -52,13 +52,13 @@ public class InventorySaveData
 {
     public string InventoryID;
     public int MaxCount;
-    public List<ItemDTO> Items;
+    public List<Slot> Slots;
     
 
     public InventorySaveData(Inventory inventory)
     {
         InventoryID = inventory.ID;
         MaxCount = inventory.MaxSlotCount;
-        Items = inventory.Items;
+        Slots = inventory.Slots;
     }
 }

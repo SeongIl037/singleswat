@@ -31,7 +31,7 @@ public class InventoryManager : Singletone<InventoryManager>
         // 모든 인벤토리에 있는 것들을 가져온다.
         foreach (InventorySaveData save in saveData.Datas)
         {
-            Inventory inven = new Inventory(save.InventoryID, save.MaxCount, save.Items);
+            Inventory inven = new Inventory(save.InventoryID, save.MaxCount, save.Slots);
             
             _inventories.Add(inven);
         }    
@@ -39,11 +39,16 @@ public class InventoryManager : Singletone<InventoryManager>
     }
     
     // 인벤토리에 아이템 추가하기
-    private void AddItemToInventory(Inventory inventory, ItemDTO item)
+    public void AddItemToInventory(Inventory inventory, Slot slot)
     {
-        inventory.AddItemToInventory(item);
+        inventory.AddItemToInventory(slot);
     }
     
     // 인벤토리에서 아이템 제거하기
+    public void RemoveItemFromInventory(Inventory inventory, Slot slot)
+    {
+        
+    }
+    
     
 }

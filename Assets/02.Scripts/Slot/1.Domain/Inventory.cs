@@ -11,9 +11,9 @@ public class Inventory
     
     
     // 현재 내 인벤토리에 있는 아이템들
-    public readonly List<ItemDTO> Items;
+    public readonly List<Slot> Slots;
 
-    public Inventory(string id, int max, List<ItemDTO> items)
+    public Inventory(string id, int max, List<Slot> slots)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -26,38 +26,39 @@ public class Inventory
         
         ID = id;
         MaxSlotCount = max;
-        Items = items;
+        Slots = slots;
         
     }
     
-    // 인벤토리에 아이템 추가하기
-    public void AddItemToInventory(ItemDTO item)
+    // 인벤토리에 슬롯 추가하기
+    public bool AddItemToInventory(Slot slot)
     {
         if (IsFullInventory(MaxSlotCount))
         {
-            Items.Add(item);
+            Slots.Add(slot);
+            return true;
         }
+
+        return false;
     }
     // 인벤토리가 꽉 찼는지 확인하기
     private bool IsFullInventory(int max)
     {
-        return Items.Count <= max;
+        return Slots.Count <= max;
     }
     
     // 아이템 제거하기 => 인벤토리에서 빼내기
-    public void RemoveItemFromInventory(ItemDTO item)
+    public void RemoveItemFromInventory(string id)
     {
-        if (Items.Count <= 0)
+        if (Slots.Count <= 0)
         {
             return;
         }
 
-        if (!HasItem(item.ItemId))
+        if (HasItem(id))
         {
-            return;
+            
         }
-        
-        Items.Remove(item);
     }
     
     // 아이템을 얼마나 가지고 있을 수 있나요? => 기타, 소비는 여러개 가능 but 장비는 여러개 불가
@@ -65,9 +66,9 @@ public class Inventory
     // 현재 인벤토리에 아이템이 존재하는가? => 인벤토리 안에 아이템 , 비교할 아이템 아이디
     private bool HasItem(string id)
     {
-        foreach (ItemDTO item in Items)
+        foreach (Slot slot in Slots)
         {
-            if (item.ItemId == id)
+            if (slot.ID == id)
             {
                 return true;
             }
